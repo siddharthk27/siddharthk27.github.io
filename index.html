@@ -267,13 +267,20 @@
       font-size: 0.75rem;
     }
 
-    /* ---- PROJECTS ---- */
+    /* ---- PROJECTS & REFERENCES ---- */
     .proj-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
-    @media (max-width: 600px) { .proj-grid { grid-template-columns: 1fr; } }
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 768px) { 
+      .proj-grid, .ref-grid { grid-template-columns: 1fr; } 
+    }
     .proj-card {
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -387,7 +394,8 @@
       .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
       .exp-date { padding-top: 0; }
       nav { padding: 0 1rem; }
-      .nav-links { gap: 1rem; }
+      .nav-links { gap: 0.75rem; }
+      .nav-links a { font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -400,6 +408,7 @@
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav>
 
@@ -657,6 +666,56 @@
       Outside research, Siddharth participates in Parliamentary Debating through BITS Pilani's Debating Society
       and engages with the Astronomy Club in sessions on astrophysics and observational astronomy.
     </p>
+  </section>
+
+  <section id="references">
+    <p class="section-label">References</p>
+    <h2>Academic References</h2>
+    <div class="ref-grid">
+
+      <div class="proj-card">
+        <p class="proj-title">Dr. Jagat Sesh Challa</p>
+        <p class="proj-desc">
+          Assistant Professor<br>
+          Dept. of Computer Science and Information Systems<br>
+          BITS Pilani<br><br>
+          <strong>Ph.D.</strong> in Computer Science, BITS Pilani
+        </p>
+        <div class="proj-footer">
+          <span class="proj-tech"></span>
+          <a class="proj-link" href="https://www.bits-pilani.ac.in/pilani/jagat-sesh-challa/" target="_blank">Website →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-title">Dr. Dhruv Kumar</p>
+        <p class="proj-desc">
+          Assistant Professor<br>
+          Department of Computer Science<br>
+          BITS Pilani<br><br>
+          <strong>Ph.D.</strong> in Computer Science, Univ. of Minnesota, Twin Cities
+        </p>
+        <div class="proj-footer">
+          <span class="proj-tech"></span>
+          <a class="proj-link" href="https://kudhru.github.io/" target="_blank">Website →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-title">Dr. Saurabh Gandhi</p>
+        <p class="proj-desc">
+          Assistant Professor<br>
+          Dept. of Electrical &amp; Electronics Engineering<br>
+          BITS Pilani<br><br>
+          <strong>Ph.D.</strong>, MIT
+        </p>
+        <div class="proj-footer">
+          <span class="proj-tech"></span>
+          <a class="proj-link" href="https://www.bits-pilani.ac.in/pilani/saurabh-gandhi/" target="_blank">Website →</a>
+        </div>
+      </div>
+
+    </div>
   </section>
 
 </main>
