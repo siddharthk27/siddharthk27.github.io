@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Siddharth Khare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --surface: #f4f3ef;
+      --border: #e2e0d8;
+      --text: #1a1916;
+      --muted: #7a7770;
+      --accent: #2d5016;
+      --accent-light: #4a7c28;
+      --link: #1a3a6e;
+      --tag-bg: #eef2e8;
+      --tag-text: #2d5016;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ---- LAYOUT ---- */
+    main { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+    section { padding: 5rem 0 3rem; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ---- HERO ---- */
+    #hero {
+      padding-top: 8rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 0.75rem;
+      opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
+    }
+    h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards;
+    }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.75;
+      opacity: 0; animation: fadeUp 0.6s 0.35s ease forwards;
+    }
+    .hero-links {
+      margin-top: 2rem;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.6s 0.5s ease forwards;
+    }
+    .hero-links a {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--link);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.4rem 0.85rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .hero-links a:hover { background: var(--surface); border-color: #c8c5b8; }
+    .hero-links a svg { width: 13px; height: 13px; }
+
+    .avatar-wrap {
+      opacity: 0; animation: fadeIn 0.8s 0.3s ease forwards;
+    }
+    .avatar-wrap img {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      display: block;
+    }
+    .avatar-placeholder {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 3px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      font-family: 'EB Garamond', serif;
+      font-size: 2.5rem;
+    }
+
+    /* ---- SECTION HEADERS ---- */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    /* ---- PUBLICATIONS ---- */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      background: #fff;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .pub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-color: #c8c5b8; }
+    .pub-number {
+      position: absolute; top: 1.3rem; right: 1.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .pub-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      padding-right: 3rem;
+    }
+    .pub-authors {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .pub-authors strong { color: var(--text); }
+    .pub-venue {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-style: italic;
+      margin-bottom: 0.75rem;
+    }
+    .pub-status {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      margin-bottom: 0.75rem;
+    }
+    .pub-status.prep { background: #fef9e7; color: #b7791f; border: 1px solid #f6e05e; }
+    .pub-status.published { background: var(--tag-bg); color: var(--tag-text); border: 1px solid #c6d9a8; }
+    .pub-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--link);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .pub-link:hover { text-decoration: underline; }
+
+    /* ---- EXPERIENCE ---- */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      line-height: 1.6;
+    }
+    .exp-org {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+    .exp-org a { color: var(--text); text-decoration: none; }
+    .exp-org a:hover { color: var(--link); }
+    .exp-role {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .exp-bullets li {
+      font-size: 0.87rem;
+      color: #3a3830;
+      line-height: 1.65;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--border);
+      font-size: 0.75rem;
+    }
+
+    /* ---- PROJECTS ---- */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .proj-grid { grid-template-columns: 1fr; } }
+    .proj-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.3rem 1.4rem;
+      background: #fff;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .proj-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-color: #c8c5b8; }
+    .proj-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .proj-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; flex: 1; }
+    .proj-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.3rem; }
+    .proj-tech {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .proj-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--link);
+      text-decoration: none;
+    }
+    .proj-link:hover { text-decoration: underline; }
+
+    /* ---- SKILLS ---- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      font-size: 0.78rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.55rem;
+      color: var(--text);
+    }
+
+    /* ---- EDUCATION ---- */
+    .edu-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      background: #fff;
+    }
+    .edu-inst { font-family: 'EB Garamond', serif; font-size: 1.2rem; font-weight: 500; }
+    .edu-degree { font-size: 0.88rem; color: var(--muted); margin: 0.2rem 0 0.8rem; }
+    .edu-courses { font-size: 0.82rem; color: #5a5850; line-height: 1.7; }
+    .edu-courses span { font-weight: 500; color: var(--text); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--border);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 640px) {
+      #hero { grid-template-columns: 1fr; }
+      .avatar-wrap { order: -1; }
+      .avatar-wrap img, .avatar-placeholder { width: 90px; height: 90px; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .exp-date { padding-top: 0; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#hero">Siddharth Khare</a>
+  <ul class="nav-links">
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section id="hero">
+    <div>
+      <p class="hero-label">Pre-final year · BITS Pilani</p>
+      <h1>Siddharth<br>Khare</h1>
+      <p class="hero-sub">
+        Mathematics &amp; Electronics undergraduate exploring machine learning,
+        geometric deep learning, and equivariant architectures. Published at
+        ICAART&nbsp;2026 and IEEE Big Data 2024.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:siddharth.khare27@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          Email
+        </a>
+        <a href="https://github.com/siddharthk27" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          siddharthk27
+        </a>
+        <a href="https://linkedin.com/in/siddharth-khare-27bp" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM9 17H6.5v-7H9v7zM7.75 8.75a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 17h-2.5v-3.5c0-1-.75-1.5-1.5-1.5s-1.5.5-1.5 1.5V17H10v-7h2.5v1c.5-.75 1.5-1 2.25-1C16.75 10 18 11.25 18 13.5V17z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-placeholder" id="avatar-placeholder">SK</div>
+      <img id="avatar-img" src="" alt="Siddharth Khare" style="display:none;" />
+    </div>
+  </section>
+
+  <section id="publications">
+    <p class="section-label">Research</p>
+    <h2>Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub-card">
+        <span class="pub-number">01</span>
+        <span class="pub-status prep">In Preparation</span>
+        <p class="pub-title">On the Interpretability and Distillation of Lorentz Equivariant Geometric Algebra Transformers</p>
+        <p class="pub-authors"><strong>Siddharth Khare</strong>, Jay Agarwal, Dhruv Kumar</p>
+        <a class="pub-link" href="https://github.com/siddharthk27/kd-lgatr-/blob/main/LGATr__Experiments_Report.pdf" target="_blank">→ Report (PDF)</a>
+      </div>
+
+      <div class="pub-card">
+        <span class="pub-number">02</span>
+        <span class="pub-status published">Published · ICAART 2026</span>
+        <p class="pub-title">KAHLT: Kolmogorov-Arnold Hybrid Latent Transformer — A Hybrid Transformer for Classification Tasks</p>
+        <p class="pub-authors">Sanyam Jain, <strong>Siddharth Khare</strong>, Jagat Sesh Challa</p>
+        <p class="pub-venue">Proceedings of the 18th International Conference on Agents and Artificial Intelligence</p>
+        <a class="pub-link" href="https://www.scitepress.org/PublishedPapers/2026/144887/" target="_blank">→ View Paper</a>
+      </div>
+
+      <div class="pub-card">
+        <span class="pub-number">03</span>
+        <span class="pub-status published">Published · IEEE Big Data 2024</span>
+        <p class="pub-title">Optimizing Liquid Neural Networks: A Comparative Study of LTCs and CFCs</p>
+        <p class="pub-authors">Pranav Deepak Tanna, <strong>Siddharth Khare</strong>, Sanyam Sanjay Jain, Shivodit Raj Vishnoi, Samay Roy, Jagat Sesh Challa</p>
+        <p class="pub-venue">Proceedings of the 2024 IEEE International Conference on Big Data</p>
+        <a class="pub-link" href="https://www.computer.org/csdl/proceedings-article/bigdata/2024/10826128/23ykP3TXIXe" target="_blank">→ View Paper</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="experience">
+    <p class="section-label">Experience</p>
+    <h2>Research &amp; Work</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-date">Incoming<br>May – Jul 2026</div>
+        <div>
+          <p class="exp-org">Flipkart</p>
+          <p class="exp-role">Data Science Intern · Bangalore, India</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Nov 2025<br>– Present</div>
+        <div>
+          <p class="exp-org">Cognition and Neural Dynamics Lab (CNDL)</p>
+          <p class="exp-role">Undergrad Researcher · Guide: Dr. Saurabh Gandhi · BITS Pilani</p>
+          <ul class="exp-bullets">
+            <li>Investigated the dissociation between self-perceived and objective smartphone usage by integrating 10-day digital well-being logs with psychometric assessments (MPPUS/SAS) for a cohort of 244 participants.</li>
+            <li>Modeled digital phenotypes (Minimalists, Checkers, Deep Divers, Hyper-Connected) to establish behavioral patterns that distinguish habit-driven users independently of their subjective self-evaluations.</li>
+            <li>Found that prolonged exposure to objective usage metrics may improve self-awareness, yielding a statistically significant reduction in perceived "Loss of Control" (p=0.0031) and enhancing users perceived behavioral autonomy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Nov 2025<br>– Present</div>
+        <div>
+          <p class="exp-org"><a href="https://phantomgrad.github.io/" target="_blank">PhantomGrad Lab</a></p>
+          <p class="exp-role">Undergraduate Researcher · Guide: Dr. Dhruv Kumar · BITS Pilani</p>
+          <ul class="exp-bullets">
+            <li>Built a PyTorch distillation pipeline transferring knowledge from Lorentz Geometric Algebra Transformers (LGATr) to MLP and DeepSets baselines for jet tagging on TopTagging and JetClass.</li>
+            <li>Extracted and visualised attention scores to investigate sparsity within equivariant geometric architectures.</li>
+            <li>Identified that logit-based KL-divergence distillation requires matching intermediate features rather than final logits alone for equivariant priors.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Mar – Jun 2026</div>
+        <div>
+          <p class="exp-org">BITS Pilani Digital</p>
+          <p class="exp-role">Teaching Assistant · Operating Systems Course</p>
+          <ul class="exp-bullets">
+            <li>Facilitated real-time query resolution for 1,300+ students during live lectures on concurrency, memory management, and file systems.</li>
+            <li>Evaluated academic assessments and programming assignments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Jan 2024<br>– Dec 2025</div>
+        <div>
+          <p class="exp-org"><a href="https://www.linkedin.com/company/bits-pilani-postman-lab/posts/?feedView=all" target="_blank">Postman Innovation Lab</a></p>
+          <p class="exp-role">AI/ML Lead · Supervisor: Dr. Jagat Sesh Challa · BITS Pilani</p>
+          <ul class="exp-bullets">
+            <li>Developed the Grouped Hybrid FFN and Hybrid Projection mechanisms to integrate Kolmogorov-Arnold Networks (KANs) with Perceiver-style latent attention, enabling non-linear feature processing with linear scalability.</li>
+            <li>Evaluated hybrid architectures on the AG News and arXiv datasets, achieving a peak accuracy of 91.43%; work culminated in publication KAHLT (ICAART 2026).</li>
+            <li>Optimized Liquid Time-Constant (LTC) and Closed-Form Continuous (CFC) networks, achieving 93.74% accuracy on Atari behavior cloning.</li>
+            <li>Benchmarked Liquid Neural Network (LNN) performance against LSTM baselines across domains including autonomous steering angle prediction and GHI forecasting; work culminated in publication LNN (IEEE Big Data 2024).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Jan – Mar 2025</div>
+        <div>
+          <p class="exp-org">Meerahi VR</p>
+          <p class="exp-role">Machine Learning Intern · Remote</p>
+          <ul class="exp-bullets">
+            <li>Designed a conversational agent with psychological health metrics to identify behavioral indicators of mental health distress and facilitate early-stage intervention.</li>
+            <li>Developed safety guardrails ensuring clinical relevance of AI-generated responses in sensitive contexts.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">May – Jul 2024</div>
+        <div>
+          <p class="exp-org">IGCAR · Dept. of Atomic Energy, GoI</p>
+          <p class="exp-role">Research Intern · Mentor: Dr. Ajay Keshari</p>
+          <ul class="exp-bullets">
+            <li>Developed DAQ software in LabVIEW using RS-232 protocols to interface with calorimeter instruments for high-precision thermal measurement.</li>
+            <li>Designed an automated validation tool enabling robust multi-day data logging and measurement tracking.</li>
+            <li>Integrated longitudinal heat-flux data into the pipeline to calculate isotopic concentrations and sample age.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <h2>Selected Work</h2>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <p class="proj-title">Shift-Invariant Transformer for Side-Channel Analysis</p>
+        <p class="proj-desc">Implemented Estranet — a shift-invariant linear attention transformer — in PyTorch. Compared Laplacian vs. Gaussian kernel attention, empirically confirming more stable training with Gaussian kernels.</p>
+        <div class="proj-footer">
+          <span class="proj-tech">PyTorch</span>
+          <a class="proj-link" href="https://github.com/siddharthk27/Estranet-pytorch" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-title">SFuzz — Slice-Based Fuzzing for RTOS</p>
+        <p class="proj-desc">Replicated a binary fuzzing system for Real-Time Operating Systems, reproducing vulnerability discovery across 35 firmware samples. Pipeline: static taint analysis in Ghidra, CPU emulation via Unicorn, concolic execution with Angr.</p>
+        <div class="proj-footer">
+          <span class="proj-tech">Ghidra · Unicorn AFL · Angr</span>
+          <a class="proj-link" href="https://github.com/siddharthk27/SFuzz-Replication" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-title">Multi-Modal Product Price Estimation</p>
+        <p class="proj-desc">Trained a regression network on fused image + text embeddings from CLIP to estimate product prices. Achieved SMAPE of 0.54 on the Amazon ML Challenge '25 dataset.</p>
+        <div class="proj-footer">
+          <span class="proj-tech">CLIP · Regression</span>
+          <a class="proj-link" href="https://www.kaggle.com/code/sidk27/actual-first-run-clean" target="_blank">Kaggle →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <p class="proj-title">Recommendation Engine for Customer Offers</p>
+        <p class="proj-desc">End-to-end learning-to-rank pipeline on high-volume Amex transactional data. LambdaMart + DeepFM ensemble with Optuna hyperparameter tuning achieved MAP@7 of 0.416.</p>
+        <div class="proj-footer">
+          <span class="proj-tech">PySpark · Pandas · DeepFM</span>
+          <a class="proj-link" href="https://www.kaggle.com/code/sidk27/amex-x" target="_blank">Kaggle →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <p class="section-label">About</p>
+    <h2>Background</h2>
+
+    <div class="edu-card" style="margin-bottom: 2rem;">
+      <p class="edu-inst">Birla Institute of Technology and Science, Pilani</p>
+      <p class="edu-degree">M.Sc. (Hons.) Mathematics + B.E. Electronics &amp; Instrumentation · 2027 (Dual Degree)</p>
+      <p class="edu-courses"><span>Coursework:</span> Machine Learning for Electronics Engineering · Statistical Inference · Nonlinear Optimisation · Operations Research · Graph Theory · Algebra · Control Systems · Operating Systems</p>
+    </div>
+
+    <div class="skills-grid" style="margin-bottom: 2rem;">
+      <div class="skill-group">
+        <p class="skill-group-title">Languages</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">NI LabVIEW</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Frameworks</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">LangChain</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Research Areas</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Geometric DL</span>
+          <span class="skill-tag">Knowledge Distillation</span>
+          <span class="skill-tag">Liquid NNs</span>
+          <span class="skill-tag">NLP</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Tools</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Ghidra</span>
+          <span class="skill-tag">PySpark</span>
+          <span class="skill-tag">Optuna</span>
+          <span class="skill-tag">CLIP</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.88rem; color:var(--muted); line-height:1.8;">
+      Outside research, Siddharth participates in Parliamentary Debating through BITS Pilani's Debating Society
+      and engages with the Astronomy Club in sessions on astrophysics and observational astronomy.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-name">Siddharth Khare</span>
+  <span class="footer-note">BITS PILANI · 2027</span>
+</footer>
+
+<script>
+  // Photo upload support — drop your photo path or handle upload
+  // To use a local photo: replace the placeholder with <img src="photo.jpg" />
+  const placeholder = document.getElementById('avatar-placeholder');
+  const img = document.getElementById('avatar-img');
+
+  // Uncomment and set path if deploying with a photo:
+  // img.src = 'profile.jpg';
+  // img.style.display = 'block';
+  // placeholder.style.display = 'none';
+</script>
+
+</body>
+</html>
