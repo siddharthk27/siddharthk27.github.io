@@ -420,8 +420,8 @@
       <h1>Siddharth<br>Khare</h1>
       <p class="hero-sub">
         Mathematics &amp; Electronics undergraduate exploring machine learning,
-        geometric deep learning, and equivariant architectures. Published at
-        ICAART&nbsp;2026 and IEEE Big Data 2024.
+        geometric deep learning, and equivariant architectures. Published at the
+        ICML&nbsp;2026 AI4Physics Workshop, ICAART&nbsp;2026, and IEEE Big Data 2024.
       </p>
       <div class="hero-links">
         <a href="mailto:siddharth.khare27@gmail.com">
@@ -451,6 +451,14 @@
 
       <div class="pub-card">
         <span class="pub-number">01</span>
+        <span class="pub-status published">Published · ICML 2026 AI4Physics</span>
+        <p class="pub-title">What do Lorentz Equivariant Jet Taggers Learn?</p>
+        <p class="pub-authors"><strong>Siddharth Khare</strong>, Jay Agarwal, Dhruv Kumar</p>
+        <p class="pub-venue">ICML 2026 Workshop on AI for Physics (AI4Physics)</p>
+      </div>
+
+      <div class="pub-card">
+        <span class="pub-number">02</span>
         <span class="pub-status prep">In Preparation</span>
         <p class="pub-title">On the Interpretability and Distillation of Lorentz Equivariant Geometric Algebra Transformers</p>
         <p class="pub-authors"><strong>Siddharth Khare</strong>, Jay Agarwal, Dhruv Kumar</p>
@@ -458,7 +466,7 @@
       </div>
 
       <div class="pub-card">
-        <span class="pub-number">02</span>
+        <span class="pub-number">03</span>
         <span class="pub-status published">Published · ICAART 2026</span>
         <p class="pub-title">KAHLT: Kolmogorov-Arnold Hybrid Latent Transformer — A Hybrid Transformer for Classification Tasks</p>
         <p class="pub-authors">Sanyam Jain, <strong>Siddharth Khare</strong>, Jagat Sesh Challa</p>
@@ -467,12 +475,20 @@
       </div>
 
       <div class="pub-card">
-        <span class="pub-number">03</span>
+        <span class="pub-number">04</span>
         <span class="pub-status published">Published · IEEE Big Data 2024</span>
         <p class="pub-title">Optimizing Liquid Neural Networks: A Comparative Study of LTCs and CFCs</p>
         <p class="pub-authors">Pranav Deepak Tanna, <strong>Siddharth Khare</strong>, Sanyam Sanjay Jain, Shivodit Raj Vishnoi, Samay Roy, Jagat Sesh Challa</p>
         <p class="pub-venue">Proceedings of the 2024 IEEE International Conference on Big Data</p>
         <a class="pub-link" href="https://www.computer.org/csdl/proceedings-article/bigdata/2024/10826128/23ykP3TXIXe" target="_blank">→ View Paper</a>
+      </div>
+
+      <div class="pub-card">
+        <span class="pub-number">05</span>
+        <span class="pub-status prep">In Preparation</span>
+        <p class="pub-title">Distilling the Knowledge of Lorentz Equivariant Transformers</p>
+        <p class="pub-authors"><strong>Siddharth Khare</strong>, Jay Agarwal, Dhruv Kumar</p>
+        <a class="pub-link" href="https://github.com/siddharthk27/kd-lgatr-/blob/main/LGATr__Experiments_Report.pdf" target="_blank">→ Report (PDF)</a>
       </div>
 
     </div>
@@ -484,10 +500,16 @@
     <div class="exp-list">
 
       <div class="exp-item">
-        <div class="exp-date">Incoming<br>May – Jul 2026</div>
+        <div class="exp-date">May – Jul 2026</div>
         <div>
           <p class="exp-org">Flipkart</p>
-          <p class="exp-role">Data Science Intern · Bangalore, India</p>
+          <p class="exp-role">Data Science Intern · Search Team · Bangalore, India</p>
+          <ul class="exp-bullets">
+            <li>Built an end-to-end automated pipeline for identifying and diagnosing issues along every step of the Search Retrieval and Ranking system.</li>
+            <li>Designed and built a profile-centric LLM-as-a-judge pipeline that replaces manual relevance annotation for search personalization, scoring product fit against users’ browse and purchase histories across 10,000+ products per evaluation run.</li>
+            <li>Integrated Flipkart Search, Catalog, and Price APIs for live retrieval and structured product enrichment; improved judgement quality using a multi-agent system for user preference extraction, query-aware attribute overrides, few-shot chain-of-thought, and dynamic store-wise prompt rubrics.</li>
+            <li>Automated the end-to-end labelling and evaluation workflow, reaching 70% agreement with human labels while reducing labelling time from 45 minutes per query manually to 18 seconds per query.</li>
+          </ul>
         </div>
       </div>
 
@@ -513,6 +535,10 @@
             <li>Built a PyTorch distillation pipeline transferring knowledge from Lorentz Geometric Algebra Transformers (LGATr) to MLP and DeepSets baselines for jet tagging on TopTagging and JetClass.</li>
             <li>Extracted and visualised attention scores to investigate sparsity within equivariant geometric architectures.</li>
             <li>Identified that logit-based KL-divergence distillation requires matching intermediate features rather than final logits alone for equivariant priors.</li>
+            <li>Developed an interpretability framework for equivariant transformers using linear probes, representation similarity, invariance tests, and structured ablations to track task-relevant information across layers.</li>
+            <li>Showed that symmetry-aware models suppress transformation-dependent nuisance information while preserving predictive features, and identified redundant representation pathways that could enable simpler architectures.</li>
+            <li>Compressed a ~1M-parameter physics-informed transformer into a 205K-parameter student that matched its AUC (0.9870), using approximately 5× fewer parameters.</li>
+            <li>Evaluated student architectures, loss functions, soft-label objectives, temperatures, intermediate-feature supervision, and relational features; found architectural inductive bias mattered most and transferred approximately 41% of the teacher’s robustness to unseen transformations.</li>
           </ul>
         </div>
       </div>
@@ -622,7 +648,7 @@
     <div class="edu-card" style="margin-bottom: 2rem;">
       <p class="edu-inst">Birla Institute of Technology and Science, Pilani</p>
       <p class="edu-degree">M.Sc. (Hons.) Mathematics + B.E. Electronics &amp; Instrumentation · 2027 (Dual Degree)</p>
-      <p class="edu-courses"><span>Coursework:</span> Machine Learning for Electronics Engineering · Statistical Inference · Nonlinear Optimisation · Operations Research · Graph Theory · Algebra · Control Systems · Operating Systems</p>
+      <p class="edu-courses"><span>Coursework:</span> Computer Programming · Machine Learning for Electronics Engineering · Statistical Inference · Applied Statistical Methods · Nonlinear Optimisation · Operations Research · Graph Theory · Algebra · Control Systems · Operating Systems</p>
     </div>
 
     <div class="skills-grid" style="margin-bottom: 2rem;">
